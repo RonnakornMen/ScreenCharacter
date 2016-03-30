@@ -14,6 +14,7 @@ import tripleplay.game.ScreenStack;
 import tripleplay.ui.*;
 import tripleplay.ui.layout.AxisLayout;
 import static playn.core.PlayN.graphics;
+import sut.game01.core.character.Zealot;
 
 
 
@@ -22,6 +23,7 @@ public class TestScreen extends Screen  {
   private final ScreenStack ss;
   private final ImageLayer bg;
   private final ImageLayer backButton;
+  private Zealot z;
   private Root root;
 
   public TestScreen(final ScreenStack ss){
@@ -48,6 +50,15 @@ public class TestScreen extends Screen  {
     super.wasShown();
     this.layer.add(bg);
     this.layer.add(backButton);
+
+    z = new Zealot(560f, 400f);
+    this.layer.add(z.layer());
   
   }
+  @Override
+  public void update(int delta){
+    super.update(delta);
+    z.update(delta);
+  }
+
 }
