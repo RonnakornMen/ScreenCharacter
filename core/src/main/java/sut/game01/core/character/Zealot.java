@@ -86,10 +86,7 @@ public class Zealot   {
 			switch(state){
 				case IDLE: offset =0; break;
 				case RUN:  offset =4; break;
-				case ATTK: offset =8; 
-							if(spriteIndex ==10 ){
-								state = State.IDLE; }
-							break;
+				case ATTK: offset =8; break;
 			}
 		
 			spriteIndex = offset + ((spriteIndex +1 ) %4);
