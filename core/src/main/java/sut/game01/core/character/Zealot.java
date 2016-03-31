@@ -40,13 +40,28 @@ public class Zealot   {
 		PlayN.keyboard().setListener(new Keyboard.Adapter(){	
 			@Override
 			public void onKeyUp(Keyboard.Event event){
-				if (event.key() == Key.SPACE) {
+				if (event.key() == Key.RIGHT) {
 					switch (state){
 						case IDLE: state = State.RUN; break;
+						//case RUN: state = State.ATTK; break;
+						//case ATTK: state = State.IDLE; break;
+					}
+				}
+				else if (event.key() == Key.SPACE) {
+					switch (state){
+						//case IDLE: state = State.RUN; break;
 						case RUN: state = State.ATTK; break;
+						//case ATTK: state = State.IDLE; break;
+					}
+				}
+				else if (event.key() == Key.ENTER) {
+					switch (state){
+						//case IDLE: state = State.RUN; break;
+						//case RUN: state = State.ATTK; break;
 						case ATTK: state = State.IDLE; break;
 					}
 				}
+				System.out.println(event.key());
 			}
 		});
 
