@@ -26,7 +26,7 @@ public class Zealot   {
 	private Sprite sprite;
 	private int spriteIndex = 0;
 	private boolean hasLoaded = false;
-
+    private int action =0;
 	public enum State {
 		IDLE, RUN, ATTK
 	};
@@ -37,32 +37,32 @@ public class Zealot   {
 	private int offset = 0;
 
 	public Zealot(final float x, final float y){
+        //int action =0;
 		PlayN.keyboard().setListener(new Keyboard.Adapter(){	
 			@Override
 			public void onKeyUp(Keyboard.Event event){
-				if (event.key() == Key.RIGHT) {
-					switch (state){
-						case IDLE: state = State.RUN; break;
-						//case RUN: state = State.ATTK; break;
-						//case ATTK: state = State.IDLE; break;
-					}
-				}
-				else if (event.key() == Key.SPACE) {
-					switch (state){
-						//case IDLE: state = State.RUN; break;
-						case RUN: state = State.ATTK; break;
-						//case ATTK: state = State.IDLE; break;
-					}
-				}
-				else if (event.key() == Key.ENTER) {
-					switch (state){
-						//case IDLE: state = State.RUN; break;
-						//case RUN: state = State.ATTK; break;
-						case ATTK: state = State.IDLE; break;
-					}
-				}
-				System.out.println(event.key());
-			}
+                if (event.key() == Key.SPACE) {
+                    action = 0;
+                    switch (state){
+                        case IDLE: if(action == 0){state = State.ATTK;} break;
+                        //case RUN: state = State.ATTK; break;
+                        case ATTK: state = State.IDLE; break;
+                    }
+                }
+
+            }
+
+            public void onKeyDown(Keyboard.Event event){
+                if (event.key() == Key.SPACE) {
+                    action = 1;
+                    switch (state){
+                        case IDLE:if(action == 1){ state = State.ATTK;} break;
+                       // case RUN: state = State.ATTK; break;
+                        case ATTK: state = State.IDLE; break;
+                    }
+                }
+
+            }
 		});
 
 		sprite = SpriteLoader.getSprite("images/zealot.json");
@@ -95,7 +95,7 @@ public class Zealot   {
 	
 	public void update(int delta) {
 		if (hasLoaded == false) return;
-
+        System.out.println(action);
 		e = e +delta;
 		if (e > 150) {
 			switch(state){

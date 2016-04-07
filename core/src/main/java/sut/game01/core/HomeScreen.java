@@ -2,10 +2,9 @@ package sut.game01.core;
 
 
 import static playn.core.PlayN.*;
-import playn.core.Image;
+
+import playn.core.*;
 import playn.core.ImageLayer;
-import playn.core.ImageLayer;
-import playn.core.Mouse;
 
 import tripleplay.game.Screen;
 import react.UnitSlot;
@@ -41,6 +40,7 @@ public class HomeScreen extends Screen  {
         ss.push(testScreen); 
       }
     });
+
   }
 
   //=============================================================
@@ -49,6 +49,14 @@ public class HomeScreen extends Screen  {
     super.wasShown();
     this.layer.add(bg);
     this.layer.add(startButton);
+      PlayN.keyboard().setListener(new Keyboard.Adapter(){
+          @Override
+          public void onKeyUp(Keyboard.Event event){
+              if (event.key() == Key.ENTER){
+                  ss.push(testScreen);
+              }
+          }
+      });
   
   }
 }
